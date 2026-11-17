@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knifflige Bewegungsaufgaben · Physik EF</title>
+<meta name="description" content="Vier anspruchsvolle Sachaufgaben zur beschleunigten Bewegung mit F = m·a und quadratischen Gleichungen, mit drei gestuften Tipps.">
+<style>
+:root{
+  color-scheme:light;
+  --ink:#17302b;--text:#40534d;--muted:#5d6e66;--paper:#f8f6ef;--white:#fffefb;--line:#dce2d8;
+  --green:#23483e;--mint:#e8f0e8;--orange:#f5a563;--rust:#a34921;--peach:#fce9d7;--ok:#2f6b3f;--bad:#a33a21;
+  font-family:"Avenir Next",Avenir,system-ui,sans-serif;color:var(--ink);background:var(--paper);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-size:16px;line-height:1.6;background:var(--paper)}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.wrap{width:min(1040px,calc(100% - 32px));margin-inline:auto}
+.top{border-bottom:1px solid #e6e4da}
+.top .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.brand i{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--green);color:#ffb77d;font-style:normal;font-weight:800}
+.top nav{display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{color:var(--text);font-size:.9rem;font-weight:650;text-decoration:none}
+.top nav a:hover{color:var(--rust)}
+.hero{padding:52px 0 36px}
+.eyebrow{display:inline-block;padding:6px 10px;border-radius:6px;background:var(--peach);color:var(--rust);font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.02;letter-spacing:-.045em;margin:16px 0 14px}
+h1 span{color:#bd562d}
+.lead{max-width:640px;color:var(--text);font-size:1.07rem}
+section{padding:30px 0}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.sub{color:var(--text);max-width:680px;margin-bottom:20px}
+.f{font-weight:600;white-space:nowrap}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tool{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tool b{display:block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+.tool .f{display:block;font-size:1.2rem;margin:4px 0}
+.tool p{color:var(--text);font-size:.92rem}
+.steps{counter-reset:s;display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:s;background:var(--mint);border-radius:10px;padding:10px 14px 10px 48px;position:relative;color:var(--ink)}
+.steps li::before{content:counter(s);position:absolute;left:12px;top:9px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.taskbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.taskbar button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:7px 14px;font-weight:700;color:var(--text)}
+.taskbar button[aria-current="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.taskbar button.done::after{content:" ✓";color:#7fd39a}
+.taskbar button[aria-current="true"].done::after{color:#b9f0c8}
+.progress{color:var(--muted);font-size:.9rem;margin-left:auto;align-self:center}
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 1px 3px rgba(23,48,43,.05)}
+.card .kicker{color:var(--rust);font-weight:800;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+.card h3{font-size:1.5rem;letter-spacing:-.025em;margin:4px 0 12px}
+.story{color:var(--ink);max-width:760px}
+.sketch{margin:16px 0;background:#f3f6f1;border:1px solid var(--line);border-radius:12px;padding:8px}
+.sketch svg{display:block;width:100%;height:auto}
+.sketch figcaption{font-size:.82rem;color:var(--muted);padding:4px 6px 0}
+.q{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center;border-top:1px solid var(--line);padding:14px 0}
+.q p{max-width:600px}
+.q p b{color:var(--rust)}
+.ans{display:flex;align-items:center;gap:8px}
+.ans input{width:120px;padding:9px 10px;border:1px solid #b9c6bc;border-radius:8px;background:#fff;text-align:right}
+.ans span{min-width:44px;color:var(--muted);font-weight:650}
+.fb{grid-column:1/-1;font-size:.92rem;min-height:0}
+.fb.ok{color:var(--ok);font-weight:700}
+.fb.bad{color:var(--bad)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.btn{border:1px solid var(--green);background:var(--green);color:#fff;border-radius:8px;padding:9px 16px;font-weight:700}
+.btn.sec{background:var(--white);color:var(--green)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.hint{margin-top:14px;border-left:4px solid var(--orange);background:var(--peach);border-radius:0 10px 10px 0;padding:12px 16px}
+.hint h4{margin:0 0 6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust)}
+.hint.h3{border-left-color:var(--green);background:var(--mint)}
+.hint.h3 h4{color:var(--green)}
+.hint p,.hint li{margin:4px 0}
+.hint ul,.hint ol{margin:4px 0;padding-left:20px}
+.eq{display:block;text-wrap:balance;font-weight:600;font-size:1.04rem;margin:6px 0 6px 10px;white-space:normal}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.foot{padding:30px 0 10px;color:var(--muted);font-size:.9rem;border-top:1px solid #e6e4da;margin-top:20px}
+.foot a{color:var(--green)}
+@media (max-width:640px){.q{grid-template-columns:1fr}.card{padding:16px}.progress{margin-left:0;width:100%}}
+@media print{.taskbar,.row,.nav2,.top nav{display:none}.hint{display:block!important}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><i>a</i>Knifflige Bewegungsaufgaben</div>
+  <nav><a href="#werkzeug">Werkzeugkasten</a><a href="#strategie">Strategie</a><a href="#aufgaben">Aufgaben</a><a href="https://dm-pkg.de/beschleunigte-bewegung-uebungen/">Grundaufgaben</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <span class="eyebrow">Physik EF · Kinematik und Dynamik</span>
+  <h1>Vier Aufgaben.<br>Eine <span>quadratische Gleichung</span> pro Fall.</h1>
+  <p class="lead">Hier rechnest du Situationen aus dem Verkehr: Zwei Fahrzeuge bewegen sich, eines davon beschleunigt oder bremst. Die Beschleunigung bekommst du aus Kraft und Masse. Am Ende steht immer eine quadratische Gleichung. Zu jeder Aufgabe gibt es drei Tipps. Tipp 1 zeigt den Ansatz, Tipp 2 den Lösungsweg, Tipp 3 die ganze Rechnung.</p>
+</div>
+
+<section id="werkzeug"><div class="wrap">
+  <h2>Werkzeugkasten</h2>
+  <p class="sub">Diese fünf Werkzeuge brauchst du. Mehr nicht.</p>
+  <div class="tools">
+    <div class="tool"><b>Grundgleichung</b><span class="f">F = m · a</span><p>Wirken mehrere Kräfte, nimmst du die resultierende Kraft: Antrieb minus Widerstand.</p></div>
+    <div class="tool"><b>Ort</b><span class="f">x(t) = ½·a·t² + v₀·t + x₀</span><p>Gleichförmig heißt a = 0. Dann bleibt x = v₀·t + x₀. Beim Bremsen ist a negativ.</p></div>
+    <div class="tool"><b>Geschwindigkeit</b><span class="f">v(t) = a·t + v₀</span><p>Beim Anhalten ist v = 0. Daraus folgt die Bremszeit t = v₀ / |a|.</p></div>
+    <div class="tool"><b>p-q-Formel</b><span class="f">t² + p·t + q = 0</span><span class="f">t = −p/2 ± √((p/2)² − q)</span><p>Teile vorher durch die Zahl vor t².</p></div>
+    <div class="tool"><b>Diskriminante</b><span class="f">D = (p/2)² − q</span><p>D &gt; 0: zwei Lösungen. D = 0: genau eine (gerade so berührt). D &lt; 0: keine (kein Treffen).</p></div>
+  </div>
+</div></section>
+
+<section id="strategie"><div class="wrap">
+  <h2>Die Lösungsstrategie</h2>
+  <p class="sub">Alle vier Aufgaben folgen demselben Plan.</p>
+  <ol class="steps">
+    <li><b>Skizze und Nullpunkt:</b> Wo ist x = 0? Welche Richtung ist positiv? Wann ist t = 0?</li>
+    <li><b>Beschleunigung:</b> Berechne a aus F = m · a. Achte auf das Vorzeichen.</li>
+    <li><b>Gleichungen:</b> Stelle für jedes Fahrzeug eine Ort-Zeit-Gleichung auf.</li>
+    <li><b>Bedingung:</b> Was heißt „treffen“, „auffahren“ oder „anhalten“ als Gleichung? Daraus entsteht eine quadratische Gleichung.</li>
+    <li><b>Prüfen:</b> Welche Lösung ist physikalisch sinnvoll? Ist die Zeit positiv? Fährt das Fahrzeug zu diesem Zeitpunkt noch?</li>
+  </ol>
+</div></section>
+
+<section id="aufgaben"><div class="wrap">
+  <h2>Die Aufgaben</h2>
+  <p class="sub">Gib Dezimalzahlen mit Komma oder Punkt ein. Runde auf zwei bis drei gültige Stellen. Eine kleine Rundungsabweichung (1 %) wird akzeptiert.</p>
+  <div class="taskbar" id="taskbar" role="tablist"></div>
+  <div id="task"></div>
+</div></section>
+</main>
+
+<div class="wrap foot">Alle Aufgaben sind erfunden, die Zahlen sind aber realistisch gewählt. Reibung und Fahrzeuglängen sind vereinfacht. · Zu den Grundaufgaben: <a href="https://dm-pkg.de/beschleunigte-bewegung-uebungen/">Bewegung berechnen</a></div>
+
+<script>
+const SKIZZE = {
+zug: `<svg viewBox="0 0 720 170" role="img" aria-label="Skizze: Regionalzug links fährt nach rechts, Rangierlok rechts fährt nach links, Abstand 180 m">
+  <line x1="20" y1="110" x2="700" y2="110" stroke="#6d7d75" stroke-width="3"/>
+  <g stroke="#9aa79f" stroke-width="2">${Array.from({length:35},(_,i)=>`<line x1="${25+i*20}" y1="104" x2="${25+i*20}" y2="116"/>`).join('')}</g>
+  <rect x="40" y="70" width="130" height="36" rx="8" fill="#23483e"/><rect x="150" y="76" width="16" height="12" rx="2" fill="#cfe3d6"/>
+  <rect x="560" y="76" width="90" height="30" rx="6" fill="#bd562d"/><rect x="566" y="82" width="14" height="10" rx="2" fill="#fce9d7"/>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#17302b">
+   <text x="40" y="60">Regionalzug, 400 t</text><text x="545" y="60">Rangierlok</text>
+   <path d="M178 88 h60" stroke="#23483e" stroke-width="3" marker-end="url(#pg)"/><text x="182" y="80">72 km/h, bremst</text>
+   <path d="M552 92 h-50" stroke="#bd562d" stroke-width="3" marker-end="url(#po)"/><text x="470" y="80">14,4 km/h</text>
+   <path d="M170 140 H560" stroke="#17302b" stroke-width="1.5" marker-start="url(#pk)" marker-end="url(#pk)"/><text x="345" y="160" text-anchor="middle">180 m</text>
+   <text x="170" y="128" text-anchor="middle" font-size="12" fill="#5d6e66">x = 0</text>
+  </g>
+  <defs><marker id="pg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#23483e"/></marker><marker id="po" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#bd562d"/></marker><marker id="pk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17302b"/></marker></defs>
+</svg>`,
+lkw: `<svg viewBox="0 0 720 170" role="img" aria-label="Skizze: Auto links und Lkw 40 m davor fahren beide nach rechts">
+  <rect x="20" y="84" width="680" height="54" fill="#d9ded6"/><line x1="20" y1="111" x2="700" y2="111" stroke="#fff" stroke-width="3" stroke-dasharray="24 18"/>
+  <rect x="90" y="92" width="70" height="30" rx="9" fill="#23483e"/>
+  <rect x="380" y="86" width="150" height="40" rx="4" fill="#bd562d"/><rect x="530" y="94" width="34" height="32" rx="5" fill="#8f3f1c"/>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#17302b">
+   <text x="70" y="70">Auto, 1500 kg</text><text x="400" y="70">Lkw</text>
+   <text x="70" y="160">108 km/h, bremst mit 1,5 kN</text><text x="440" y="160">72 km/h, konstant</text>
+   <path d="M160 40 H380" stroke="#17302b" stroke-width="1.5" marker-start="url(#qk)" marker-end="url(#qk)"/><text x="270" y="33" text-anchor="middle">40 m</text>
+   <line x1="160" y1="44" x2="160" y2="88" stroke="#17302b" stroke-dasharray="3 3"/><line x1="380" y1="44" x2="380" y2="84" stroke="#17302b" stroke-dasharray="3 3"/>
+  </g>
+  <defs><marker id="qk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17302b"/></marker></defs>
+</svg>`,
+ueberholen: `<svg viewBox="0 0 720 190" role="img" aria-label="Skizze: Auto schert hinter einem Traktor aus, Motorrad kommt in 225 m Entfernung entgegen">
+  <rect x="20" y="70" width="680" height="84" fill="#d9ded6"/><line x1="20" y1="112" x2="700" y2="112" stroke="#fff" stroke-width="3" stroke-dasharray="24 18"/>
+  <rect x="60" y="122" width="62" height="26" rx="8" fill="#23483e"/>
+  <rect x="150" y="118" width="58" height="32" rx="4" fill="#6b8f3a"/><circle cx="160" cy="150" r="9" fill="#33402e"/><circle cx="196" cy="148" r="12" fill="#33402e"/>
+  <path d="M90 120 C110 104 120 96 140 92" stroke="#23483e" stroke-width="2.5" fill="none" stroke-dasharray="5 4" marker-end="url(#rg)"/>
+  <rect x="600" y="80" width="40" height="18" rx="6" fill="#bd562d"/>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#17302b">
+   <text x="40" y="176">Auto, 1250 kg, 54 km/h</text><text x="200" y="176">Traktor, 54 km/h</text>
+   <text x="560" y="64">Motorrad, 90 km/h</text>
+   <path d="M592 89 h-50" stroke="#bd562d" stroke-width="3" marker-end="url(#ro)"/>
+   <path d="M122 40 H600" stroke="#17302b" stroke-width="1.5" marker-start="url(#rk)" marker-end="url(#rk)"/><text x="360" y="33" text-anchor="middle">225 m beim Ausscheren</text>
+   <text x="300" y="104" font-size="13" fill="#5d6e66">Überholen: 40 m mehr als der Traktor</text>
+  </g>
+  <defs><marker id="rg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#23483e"/></marker><marker id="ro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#bd562d"/></marker><marker id="rk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17302b"/></marker></defs>
+</svg>`,
+kind: `<svg viewBox="0 0 720 170" role="img" aria-label="Skizze: Auto, Kind springt 40 m vor dem Auto hinter einem Bus hervor; Reaktionsweg und Bremsweg">
+  <rect x="20" y="80" width="680" height="54" fill="#d9ded6"/><rect x="20" y="70" width="680" height="10" fill="#c5ccc2"/>
+  <rect x="60" y="94" width="70" height="30" rx="9" fill="#23483e"/>
+  <rect x="470" y="36" width="170" height="36" rx="6" fill="#e2b04a"/><g fill="#fff6dc">${[0,1,2,3,4].map(i=>`<rect x="${480+i*30}" y="42" width="20" height="12" rx="2"/>`).join('')}</g>
+  <circle cx="560" cy="92" r="7" fill="#bd562d"/><rect x="554" y="99" width="12" height="18" rx="4" fill="#bd562d"/>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#17302b">
+   <text x="50" y="80">Auto, 1200 kg</text><text x="490" y="28">Bus</text><text x="575" y="112">Kind</text>
+   <path d="M130 150 H260" stroke="#a34921" stroke-width="2" marker-start="url(#sk)" marker-end="url(#sk)"/><text x="195" y="166" text-anchor="middle" font-size="13">Reaktionsweg (1,0 s)</text>
+   <path d="M260 150 H555" stroke="#23483e" stroke-width="2" marker-start="url(#sk)" marker-end="url(#sk)"/><text x="408" y="166" text-anchor="middle" font-size="13">Bremsweg (8,4 kN)</text>
+   <text x="342" y="146" text-anchor="middle">40 m</text>
+  </g>
+  <defs><marker id="sk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17302b"/></marker></defs>
+</svg>`
+};
+
+const AUFGABEN = [
+{
+  id:"zug", titel:"Gegenverkehr auf eingleisiger Strecke", art:"Aufeinander zu · Bremsen gegen gleichförmig",
+  text:`Ein Regionalzug (Masse 400 t) fährt mit 72 km/h auf einer eingleisigen Strecke. Der Lokführer sieht 180 m vor sich eine Rangierlok. Sie kommt ihm mit konstant 14,4 km/h entgegen, ihr Fahrer bemerkt nichts. Der Lokführer löst sofort eine Schnellbremsung aus. Die Bremskraft beträgt 480 kN. Die Reaktionszeit vernachlässigen wir.`,
+  caption:"Nullpunkt: Zugspitze bei Bremsbeginn. Fahrtrichtung des Zuges ist positiv.",
+  fragen:[
+    {t:"Nach wie vielen Sekunden stoßen die beiden Fahrzeuge zusammen?", unit:"s", wert:10},
+    {t:"Wie schnell ist der Regionalzug beim Zusammenstoß?", unit:"km/h", wert:28.8}
+  ],
+  tipps:[
+`<p>Lege den Nullpunkt an die Zugspitze bei Bremsbeginn. Die Fahrtrichtung des Zuges ist positiv.</p>
+<ul><li>Rechne die Geschwindigkeiten in m/s um.</li><li>Berechne den Betrag der Bremsverzögerung mit F = m · a.</li><li>Stelle für Zug und Lok je eine Ort-Zeit-Gleichung auf. Die Lok startet bei x₀ = 180 m und fährt in negative Richtung.</li><li>Zusammenstoß heißt: gleicher Ort zur gleichen Zeit. Also x<sub>Zug</sub>(t) = x<sub>Lok</sub>(t).</li></ul>`,
+`<p>a = 480 000 N : 400 000 kg = 1,2 m/s². Der Zug bremst, also steht im Ort-Gesetz −1,2 m/s².</p>
+<span class="eq">x<sub>Zug</sub>(t) = 20·t − 0,6·t²</span>
+<span class="eq">x<sub>Lok</sub>(t) = 180 − 4·t</span>
+<p>Gleichsetzen und alles auf eine Seite bringen:</p>
+<span class="eq">0,6·t² − 24·t + 180 = 0 &nbsp;|&nbsp; : 0,6 &nbsp;⇒&nbsp; t² − 40·t + 300 = 0</span>
+<p>Löse mit der p-q-Formel. Du bekommst zwei Zeiten. Prüfe: Wann steht der Zug still? Gilt die Gleichung danach noch?</p>
+<p>Für b) setzt du die richtige Zeit in v(t) = 20 − 1,2·t ein.</p>`,
+`<ol>
+<li>Umrechnen: 72 km/h = 20 m/s, 14,4 km/h = 4 m/s.</li>
+<li>a = F : m = 480 000 N : 400 000 kg = 1,2 m/s² (bremsend).</li>
+<li>Ansatz: 20·t − 0,6·t² = 180 − 4·t ⇒ t² − 40·t + 300 = 0.</li>
+<li>p-q-Formel: t = 20 ± √(400 − 300) = 20 ± 10. Also t₁ = 10 s und t₂ = 30 s.</li>
+<li>Prüfen: Der Zug stünde nach t = 20 : 1,2 ≈ 16,7 s still. Danach gilt sein Ort-Gesetz nicht mehr. t₂ = 30 s fällt also weg.</li>
+<li><b>a)</b> Zusammenstoß nach <b>10 s</b>, und zwar bei x = 20·10 − 0,6·100 = 140 m. Kontrolle: Die Lok fährt in 10 s genau 40 m, 140 m + 40 m = 180 m.</li>
+<li><b>b)</b> v = 20 m/s − 1,2 m/s² · 10 s = 8 m/s = <b>28,8 km/h</b>.</li>
+</ol>
+<p>Deutung: Die Bremsung verhindert den Unfall nicht. Sie senkt aber die Geschwindigkeit des Zuges von 72 km/h auf unter 30 km/h.</p>`
+  ]
+},
+{
+  id:"lkw", titel:"Auffahrunfall auf nassem Laub", art:"Gleiche Richtung · Diskriminante",
+  text:`Ein Auto (Masse 1500 kg) fährt mit 108 km/h. 40 m vor ihm fährt ein Lkw mit konstant 72 km/h. Der Fahrer des Autos bremst. Auf nassem Laub erreichen die Bremsen aber nur eine Bremskraft von 1,5 kN. Die 40 m Abstand gelten bei Bremsbeginn.`,
+  caption:"Nullpunkt: Front des Autos bei Bremsbeginn. Beide fahren in positive Richtung.",
+  fragen:[
+    {t:"Nach welcher Zeit fährt das Auto auf den Lkw auf?", unit:"s", wert:10-Math.sqrt(20)},
+    {t:"Welche Bremskraft wäre mindestens nötig gewesen, um den Unfall gerade noch zu vermeiden?", unit:"N", wert:1875}
+  ],
+  tipps:[
+`<p>Lege den Nullpunkt an die Front des Autos bei Bremsbeginn.</p>
+<ul><li>Berechne a aus F = m · a.</li><li>Auto: gleichmäßig verzögert. Lkw: gleichförmig, startet bei x₀ = 40 m.</li><li>Auffahren heißt x<sub>Auto</sub>(t) = x<sub>Lkw</sub>(t).</li><li>Für b): „Gerade noch vermieden“ heißt, das Auto berührt den Lkw nur und wird dabei genau so langsam wie er. Die Gleichung hat dann <em>genau eine</em> Lösung. Was gilt dann für die Diskriminante?</li></ul>`,
+`<p>a = 1500 N : 1500 kg = 1 m/s². Umrechnen: 108 km/h = 30 m/s, 72 km/h = 20 m/s.</p>
+<span class="eq">30·t − 0,5·t² = 40 + 20·t &nbsp;⇒&nbsp; t² − 20·t + 80 = 0</span>
+<p>Von den zwei Lösungen zählt die kleinere: Das ist der erste Kontakt.</p>
+<p>Für b) lässt du a als Unbekannte stehen:</p>
+<span class="eq">½·a·t² − 10·t + 40 = 0 &nbsp;⇒&nbsp; t² − (20/a)·t + 80/a = 0</span>
+<p>Setze die Diskriminante (10/a)² − 80/a gleich null und löse nach a auf. Dann F = m · a.</p>`,
+`<ol>
+<li>a = 1 m/s², v<sub>Auto</sub> = 30 m/s, v<sub>Lkw</sub> = 20 m/s.</li>
+<li>Ansatz: 30·t − 0,5·t² = 40 + 20·t ⇒ t² − 20·t + 80 = 0.</li>
+<li>p-q-Formel: t = 10 ± √(100 − 80) = 10 ± √20 ≈ 10 ± 4,47.</li>
+<li><b>a)</b> Erster Kontakt nach t ≈ <b>5,53 s</b>. Das Auto fährt dann noch 30 − 5,53 ≈ 24,5 m/s, also etwa 16 km/h schneller als der Lkw. (Die zweite Lösung 14,5 s würde gelten, wenn das Auto durch den Lkw hindurchfahren könnte.)</li>
+<li>b) Diskriminante null: (10/a)² − 80/a = 0 ⇒ 100/a² = 80/a ⇒ a = 100 : 80 = 1,25 m/s².</li>
+<li><b>b)</b> F = m · a = 1500 kg · 1,25 m/s² = <b>1875 N</b>.</li>
+</ol>
+<p>Kontrolle: Mit a = 1,25 m/s² ist das Auto nach t = 10 : 1,25 = 8 s genau so schnell wie der Lkw. In diesen 8 s fährt es 30·8 − 0,625·64 = 200 m, der Lkw ist bei 40 + 160 = 200 m. Abstand null, keine Delle.</p>`
+  ]
+},
+{
+  id:"ueberholen", titel:"Überholen mit Gegenverkehr", art:"Resultierende Kraft · Aufeinander zu",
+  text:`Ein Auto (Masse 1250 kg) fährt mit 54 km/h hinter einem Traktor her, der ebenfalls 54 km/h fährt. Der Fahrer schert zum Überholen aus und gibt Vollgas. Der Motor liefert eine Antriebskraft von 3,0 kN. Luft- und Rollwiderstand bremsen zusammen mit 0,5 kN. Das Auto ist fertig, wenn es 40 m mehr zurückgelegt hat als der Traktor. Beim Ausscheren kommt in 225 m Entfernung ein Motorrad mit konstant 90 km/h entgegen.`,
+  caption:"Nullpunkt: Front des Autos beim Ausscheren. Fahrtrichtung des Autos ist positiv.",
+  fragen:[
+    {t:"Nach welcher Zeit würden sich Auto und Motorrad treffen?", unit:"s", wert:5},
+    {t:"Welchen Abstand zum Motorrad hätte das Auto beim Ausscheren mindestens haben müssen, um gefahrlos zu überholen?", unit:"m", wert:40*Math.sqrt(40)+40}
+  ],
+  tipps:[
+`<p>Hier stecken zwei Teilprobleme drin.</p>
+<ul><li>Zuerst die resultierende Kraft: F<sub>res</sub> = F<sub>Antrieb</sub> − F<sub>Widerstand</sub>. Dann a = F<sub>res</sub> : m.</li><li>Treffen mit dem Motorrad: Ort-Zeit-Gleichungen gleichsetzen. Das Motorrad startet bei x₀ = 225 m und fährt in negative Richtung.</li><li>Dauer des Überholens: Der Abstand zwischen Auto und Traktor wächst nur durch den Anteil ½·a·t². Beide haben ja dasselbe v₀.</li><li>Für b): Das Treffen mit dem Motorrad darf frühestens am Ende des Überholens passieren.</li></ul>`,
+`<p>F<sub>res</sub> = 2500 N ⇒ a = 2500 N : 1250 kg = 2 m/s². Umrechnen: 54 km/h = 15 m/s, 90 km/h = 25 m/s.</p>
+<span class="eq">x<sub>Auto</sub>(t) = 15·t + t²</span>
+<span class="eq">x<sub>Motorrad</sub>(t) = 225 − 25·t</span>
+<span class="eq">15·t + t² = 225 − 25·t &nbsp;⇒&nbsp; t² + 40·t − 225 = 0</span>
+<p>Überholdauer: x<sub>Auto</sub> − x<sub>Traktor</sub> = t² = 40 ⇒ t<sub>Ü</sub> = √40 s.</p>
+<p>Für b): Der Abstand D muss so groß sein, dass das Treffen genau bei t<sub>Ü</sub> passiert: D = x<sub>Auto</sub>(t<sub>Ü</sub>) + 25·t<sub>Ü</sub>.</p>`,
+`<ol>
+<li>a = (3000 N − 500 N) : 1250 kg = 2 m/s².</li>
+<li>Ansatz: t² + 40·t − 225 = 0.</li>
+<li>p-q-Formel: t = −20 ± √(400 + 225) = −20 ± 25. Die negative Lösung −45 s liegt vor dem Ausscheren und fällt weg.</li>
+<li><b>a)</b> Auto und Motorrad treffen sich nach <b>5 s</b>.</li>
+<li>Überholdauer: t² = 40 ⇒ t<sub>Ü</sub> = √40 s ≈ 6,32 s. Das ist länger als 5 s. Der Überholvorgang muss abgebrochen werden!</li>
+<li><b>b)</b> D = 15·6,32 + 6,32² + 25·6,32 = 40·√40 + 40 ≈ <b>293 m</b>.</li>
+</ol>
+<p>Zusatz: Am Ende fährt das Auto 15 + 2·6,32 ≈ 27,6 m/s ≈ 100 km/h. Mehr ist auf der Landstraße ohnehin nicht erlaubt.</p>`
+  ]
+},
+{
+  id:"kind", titel:"Das Kind hinter dem Bus", art:"Substitution · Unbekannt ist v₀",
+  text:`Ein Kind springt 40 m vor einem Auto (Masse 1200 kg) hinter einem haltenden Bus auf die Straße. Die Fahrerin reagiert nach 1,0 s. In dieser Zeit fährt das Auto unverändert weiter. Danach bremst sie voll, die Bremskraft beträgt 8,4 kN.`,
+  caption:"Anhalteweg = Reaktionsweg (gleichförmig) + Bremsweg (gleichmäßig verzögert).",
+  fragen:[
+    {t:"Wie schnell darf das Auto höchstens fahren, damit es noch vor dem Kind zum Stehen kommt?", unit:"km/h", wert:(-7+Math.sqrt(609))*3.6},
+    {t:"Das Auto fährt aber 72 km/h. Mit welcher Geschwindigkeit erreicht es die Stelle, an der das Kind steht?", unit:"km/h", wert:Math.sqrt(120)*3.6}
+  ],
+  tipps:[
+`<p>Hier ist die Anfangsgeschwindigkeit v₀ die Unbekannte, nicht die Zeit.</p>
+<ul><li>Berechne a aus F = m · a.</li><li>Teile den Anhalteweg auf: Reaktionsweg v₀ · t<sub>R</sub> plus Bremsweg.</li><li>Für den Bremsweg kennst du die Zeit nicht. Hol sie dir aus v(t) = v₀ − a·t mit v = 0 und setze sie in die Ort-Gleichung ein (Substitution).</li><li>So entsteht eine quadratische Gleichung in v₀.</li></ul>`,
+`<p>a = 8400 N : 1200 kg = 7 m/s².</p>
+<p>Bremszeit: 0 = v₀ − a·t<sub>B</sub> ⇒ t<sub>B</sub> = v₀ / a. Einsetzen:</p>
+<span class="eq">s<sub>B</sub> = v₀·t<sub>B</sub> − ½·a·t<sub>B</sub>² = v₀²/a − v₀²/(2a) = v₀² / (2a)</span>
+<p>Ansatz für den Anhalteweg:</p>
+<span class="eq">v₀ · 1 s + v₀² / 14 = 40 &nbsp;⇒&nbsp; v₀² + 14·v₀ − 560 = 0</span>
+<p>Für b): Reaktionsweg bei 20 m/s sind 20 m. Für das Bremsen bleiben noch 20 m. Gesucht ist v nach diesen 20 m. Entweder t aus 20 = 20·t − 3,5·t² bestimmen und in v(t) einsetzen. Oder die Substitution von oben allgemein nutzen: v² = v₀² − 2·a·s.</p>`,
+`<ol>
+<li>a = 8400 N : 1200 kg = 7 m/s².</li>
+<li>Bremsweg durch Substitution: s<sub>B</sub> = v₀² / (2a) = v₀² / 14.</li>
+<li>Ansatz: v₀ + v₀²/14 = 40 ⇒ v₀² + 14·v₀ − 560 = 0.</li>
+<li>p-q-Formel: v₀ = −7 ± √(49 + 560) = −7 ± 24,68. Nur die positive Lösung ist sinnvoll: v₀ ≈ 17,68 m/s.</li>
+<li><b>a)</b> v₀ ≈ 17,7 m/s ≈ <b>63,6 km/h</b>.</li>
+<li>b) 72 km/h = 20 m/s. Reaktionsweg 20 m, Bremsstrecke bis zum Kind 20 m.</li>
+<li>20 = 20·t − 3,5·t² ⇒ t² − (40/7)·t + 40/7 = 0 ⇒ t = 20/7 − √(120)/7 ≈ 1,29 s. (Die größere Lösung liegt nach dem Stillstand.)</li>
+<li><b>b)</b> v = 20 − 7 · 1,29 ≈ 10,95 m/s ≈ <b>39,4 km/h</b>. Kontrolle: v² = 20² − 2·7·20 = 120 ⇒ v ≈ 10,95 m/s.</li>
+</ol>
+<p>Deutung: Bei Tempo 72 statt etwa 64 trifft das Auto das Kind noch mit fast 40 km/h. Ein paar km/h mehr machen beim Anhalten einen großen Unterschied.</p>`
+  ]
+}
+];
+
+const KEY = "knobelaufgaben:v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const solved = id => AUFGABEN.find(a => a.id === id).fragen.every((_, i) => state[id + i]);
+let cur = 0;
+
+function parse(raw) {
+  const v = raw.trim().replace(/^−/, "-").replace(/\s/g, "").replace(",", ".");
+  return /^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(v) ? Number(v) : NaN;
+}
+function bar() {
+  const tb = document.getElementById("taskbar");
+  tb.innerHTML = AUFGABEN.map((a, i) => `<button role="tab" aria-current="${i === cur}" class="${solved(a.id) ? "done" : ""}" data-i="${i}">Aufgabe ${i + 1}</button>`).join("")
+    + `<span class="progress">${AUFGABEN.filter(a => solved(a.id)).length} von 4 gelöst</span>`;
+  tb.querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; render(); document.getElementById("aufgaben").scrollIntoView({behavior: "smooth"}); });
+}
+function render() {
+  const A = AUFGABEN[cur], el = document.getElementById("task");
+  const shown = state[A.id + "tipp"] || 0;
+  el.innerHTML = `<article class="card">
+    <div class="kicker">Aufgabe ${cur + 1} · ${A.art}</div>
+    <h3>${A.titel}</h3>
+    <p class="story">${A.text}</p>
+    <figure class="sketch">${SKIZZE[A.id]}<figcaption>${A.caption}</figcaption></figure>
+    ${A.fragen.map((f, i) => `<form class="q" data-i="${i}">
+      <p><b>${"ab"[i]})</b> ${f.t}</p>
+      <div class="ans"><input inputmode="decimal" autocomplete="off" aria-label="Antwort ${"ab"[i]} in ${f.unit}" value="${state[A.id + i] ? String(+f.wert.toPrecision(3)).replace(".", ",") : ""}"><span>${f.unit}</span><button class="btn">Prüfen</button></div>
+      <div class="fb ${state[A.id + i] ? "ok" : ""}" aria-live="polite">${state[A.id + i] ? "Richtig!" : ""}</div>
+    </form>`).join("")}
+    <div class="row">
+      <button class="btn sec" id="tipp" ${shown >= 3 ? "disabled" : ""}>${["Tipp 1: Ansatz", "Tipp 2: Lösungsweg", "Tipp 3: Ganze Lösung", "Alle Tipps offen"][shown]}</button>
+      ${shown ? `<button class="btn sec" id="zu">Tipps verbergen</button>` : ""}
+    </div>
+    <div id="tipps">${A.tipps.slice(0, shown).map((t, i) => `<div class="hint ${i === 2 ? "h3" : ""}"><h4>${["Tipp 1 · Ansatz", "Tipp 2 · Ansatz und Lösungsskizze", "Tipp 3 · Die gerechnete Lösung"][i]}</h4>${t}</div>`).join("")}</div>
+    <div class="nav2"><button class="btn sec" id="prev" ${cur === 0 ? "disabled" : ""}>← Vorherige</button><button class="btn sec" id="next" ${cur === 3 ? "disabled" : ""}>Nächste →</button></div>
+  </article>`;
+  el.querySelectorAll("form.q").forEach(f => f.onsubmit = ev => {
+    ev.preventDefault();
+    const i = +f.dataset.i, F = A.fragen[i], v = parse(f.querySelector("input").value), fb = f.querySelector(".fb");
+    if (!Number.isFinite(v)) { fb.className = "fb bad"; fb.textContent = "Gib eine Zahl ein. Die Einheit steht schon neben dem Feld."; return; }
+    if (Math.abs(v - F.wert) <= Math.abs(F.wert) * 0.01) {
+      fb.className = "fb ok"; fb.textContent = "Richtig!"; state[A.id + i] = true; save(); bar();
+    } else {
+      fb.className = "fb bad";
+      fb.textContent = Math.abs(v + F.wert) <= Math.abs(F.wert) * 0.01 ? "Der Betrag stimmt, das Vorzeichen nicht. Hier ist ein Betrag gefragt."
+        : (F.unit === "km/h" && Math.abs(v * 3.6 - F.wert) <= Math.abs(F.wert) * 0.01) ? "Fast: Du hast das Ergebnis in m/s. Gefragt ist km/h."
+        : "Das stimmt noch nicht. Prüfe Vorzeichen und Einheiten oder hol dir den nächsten Tipp.";
+    }
+  });
+  el.querySelector("#tipp").onclick = () => { state[A.id + "tipp"] = Math.min(3, shown + 1); save(); render(); el.querySelectorAll(".hint")[shown]?.scrollIntoView({behavior: "smooth", block: "nearest"}); };
+  const zu = el.querySelector("#zu"); if (zu) zu.onclick = () => { state[A.id + "tipp"] = 0; save(); render(); };
+  el.querySelector("#prev").onclick = () => { cur--; render(); };
+  el.querySelector("#next").onclick = () => { cur++; render(); };
+  bar();
+}
+render();
+</script>
+<!-- rechtliches --><style>.erik-recht{font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-align:center;padding:18px 12px 22px;opacity:.75}.erik-recht a{color:inherit}@media print{.erik-recht{display:none}}</style><footer class="erik-recht"><a href="https://dm-pkg.de/impressum.html">Impressum</a> · <a href="https://dm-pkg.de/datenschutz.html">Datenschutz</a></footer><!-- /rechtliches --></body>
+</html>
