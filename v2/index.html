@@ -79,7 +79,7 @@ h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;line-height:1.15;mar
 .hint.h3 h4{color:var(--green)}
 .hint p,.hint li{margin:4px 0}
 .hint ul,.hint ol{margin:4px 0;padding-left:20px}
-.eq{display:block;text-wrap:balance;font-weight:600;font-size:1.04rem;margin:6px 0 6px 10px;white-space:normal}
+.eq{display:block;white-space:nowrap;overflow-x:auto;padding-bottom:2px;font-weight:600;font-size:1.04rem;margin:6px 0 6px 10px;white-space:normal}
 .nav2{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
 .foot{padding:30px 0 10px;color:var(--muted);font-size:.9rem;border-top:1px solid #e6e4da;margin-top:20px}
 .foot a{color:var(--green)}
@@ -204,24 +204,32 @@ const AUFGABEN = [
     {t:"Wie schnell ist der Regionalzug beim Zusammenstoß?", unit:"km/h", wert:28.8}
   ],
   tipps:[
-`<p>Lege den Nullpunkt an die Zugspitze bei Bremsbeginn. Die Fahrtrichtung des Zuges ist positiv.</p>
-<ul><li>Rechne die Geschwindigkeiten in m/s um.</li><li>Berechne den Betrag der Bremsverzögerung mit F = m · a.</li><li>Stelle für Zug und Lok je eine Ort-Zeit-Gleichung auf. Die Lok startet bei x₀ = 180 m und fährt in negative Richtung.</li><li>Zusammenstoß heißt: gleicher Ort zur gleichen Zeit. Also x<sub>Zug</sub>(t) = x<sub>Lok</sub>(t).</li></ul>`,
-`<p>a = 480 000 N : 400 000 kg = 1,2 m/s². Der Zug bremst, also steht im Ort-Gesetz −1,2 m/s².</p>
-<span class="eq">x<sub>Zug</sub>(t) = 20·t − 0,6·t²</span>
-<span class="eq">x<sub>Lok</sub>(t) = 180 − 4·t</span>
-<p>Gleichsetzen und alles auf eine Seite bringen:</p>
-<span class="eq">0,6·t² − 24·t + 180 = 0 &nbsp;|&nbsp; : 0,6 &nbsp;⇒&nbsp; t² − 40·t + 300 = 0</span>
-<p>Löse mit der p-q-Formel. Du bekommst zwei Zeiten. Prüfe: Wann steht der Zug still? Gilt die Gleichung danach noch?</p>
-<p>Für b) setzt du die richtige Zeit in v(t) = 20 − 1,2·t ein.</p>`,
+`<p><b>Gegeben:</b> m = 400 t, F<sub>B</sub> = 480 kN, v<sub>Z</sub> = 72 km/h, v<sub>L</sub> = 14,4 km/h, d = 180 m. <b>Gesucht:</b> a) Zeit t<sub>1</sub> bis zum Zusammenstoß, b) v<sub>Z</sub>(t<sub>1</sub>).</p>
+<ul><li>Nullpunkt an der Zugspitze bei Bremsbeginn, Fahrtrichtung des Zuges positiv.</li><li>Den Betrag der Bremsverzögerung a liefert F = m · a.</li><li>Stelle für Zug und Lok je eine Ort-Zeit-Gleichung auf, nur mit Buchstaben. Die Lok startet bei d und fährt in negative Richtung.</li><li>Zusammenstoß heißt: x<sub>Z</sub>(t) = x<sub>L</sub>(t).</li></ul>`,
+`<p>Beschleunigung: <span class="eq">a = F<sub>B</sub> / m</span></p>
+<p>Ort-Zeit-Gleichungen:</p>
+<span class="eq">x<sub>Z</sub>(t) = v<sub>Z</sub>·t − ½·a·t²</span>
+<span class="eq">x<sub>L</sub>(t) = d − v<sub>L</sub>·t</span>
+<p>Gleichsetzen, alles auf eine Seite, durch ½·a teilen:</p>
+<span class="eq">t² − (2·(v<sub>Z</sub> + v<sub>L</sub>) / a)·t + 2·d / a = 0</span>
+<p>Löse mit der p-q-Formel nach t auf. Du bekommst zwei Lösungen. Vergleiche mit der Zeit bis zum Stillstand t<sub>S</sub> = v<sub>Z</sub> / a. Erst ganz am Ende setzt du Zahlen ein.</p>
+<p>Für b): <span class="eq">v<sub>Z</sub>(t<sub>1</sub>) = v<sub>Z</sub> − a·t<sub>1</sub></span></p>`,
 `<ol>
-<li>Umrechnen: 72 km/h = 20 m/s, 14,4 km/h = 4 m/s.</li>
-<li>a = F : m = 480 000 N : 400 000 kg = 1,2 m/s² (bremsend).</li>
-<li>Ansatz: 20·t − 0,6·t² = 180 − 4·t ⇒ t² − 40·t + 300 = 0.</li>
-<li>p-q-Formel: t = 20 ± √(400 − 300) = 20 ± 10. Also t₁ = 10 s und t₂ = 30 s.</li>
-<li>Prüfen: Der Zug stünde nach t = 20 : 1,2 ≈ 16,7 s still. Danach gilt sein Ort-Gesetz nicht mehr. t₂ = 30 s fällt also weg.</li>
-<li><b>a)</b> Zusammenstoß nach <b>10 s</b>, und zwar bei x = 20·10 − 0,6·100 = 140 m. Kontrolle: Die Lok fährt in 10 s genau 40 m, 140 m + 40 m = 180 m.</li>
-<li><b>b)</b> v = 20 m/s − 1,2 m/s² · 10 s = 8 m/s = <b>28,8 km/h</b>.</li>
+<li><b>Beschleunigung:</b> <span class="eq">a = F<sub>B</sub> / m</span></li>
+<li><b>Ansatz:</b> x<sub>Z</sub>(t) = x<sub>L</sub>(t) <span class="eq">v<sub>Z</sub>·t − ½·a·t² = d − v<sub>L</sub>·t</span></li>
+<li><b>Umformen:</b> <span class="eq">½·a·t² − (v<sub>Z</sub> + v<sub>L</sub>)·t + d = 0 &nbsp;| · 2/a</span><span class="eq">t² − (2·(v<sub>Z</sub> + v<sub>L</sub>) / a)·t + 2·d / a = 0</span></li>
+<li><b>p-q-Formel:</b> <span class="eq">t<sub>1,2</sub> = (v<sub>Z</sub> + v<sub>L</sub>) / a ± √( ((v<sub>Z</sub> + v<sub>L</sub>) / a)² − 2·d / a )</span></li>
+<li><b>Lösung auswählen:</b> Der Zug steht nach t<sub>S</sub> = v<sub>Z</sub> / a still. Danach gilt x<sub>Z</sub>(t) nicht mehr. Also gilt das Minuszeichen.</li>
+<li><b>Zahlen einsetzen:</b> v<sub>Z</sub> = 20 m/s, v<sub>L</sub> = 4 m/s.
+<span class="eq">a = 480 000 N / 400 000 kg = 1,2 m/s²</span>
+<span class="eq">(v<sub>Z</sub> + v<sub>L</sub>) / a = (20 m/s + 4 m/s) / 1,2 m/s² = 20 s</span>
+<span class="eq">2·d / a = 2 · 180 m / 1,2 m/s² = 300 s²</span>
+<span class="eq">t<sub>1,2</sub> = 20 s ± √(400 s² − 300 s²) = 20 s ± 10 s</span>
+<span class="eq">t<sub>S</sub> = 20 m/s / 1,2 m/s² ≈ 16,7 s</span>
+<b>a)</b> t<sub>2</sub> = 30 s liegt nach dem Stillstand und fällt weg. Zusammenstoß nach <b>t<sub>1</sub> = 10 s</b>.</li>
+<li><b>b)</b> <span class="eq">v<sub>Z</sub>(t<sub>1</sub>) = v<sub>Z</sub> − a·t<sub>1</sub> = 20 m/s − 1,2 m/s² · 10 s</span><span class="eq">&nbsp;&nbsp;&nbsp;= 8 m/s = <b>28,8 km/h</b></span></li>
 </ol>
+<p>Kontrolle: x<sub>Z</sub>(t<sub>1</sub>) = 20 m/s · 10 s − ½ · 1,2 m/s² · (10 s)² = 140 m. Die Lok fährt in 10 s genau 40 m, und 140 m + 40 m = 180 m.</p>
 <p>Deutung: Die Bremsung verhindert den Unfall nicht. Sie senkt aber die Geschwindigkeit des Zuges von 72 km/h auf unter 30 km/h.</p>`
   ]
 },
@@ -234,23 +242,31 @@ const AUFGABEN = [
     {t:"Welche Bremskraft wäre mindestens nötig gewesen, um den Unfall gerade noch zu vermeiden?", unit:"N", wert:1875}
   ],
   tipps:[
-`<p>Lege den Nullpunkt an die Front des Autos bei Bremsbeginn.</p>
-<ul><li>Berechne a aus F = m · a.</li><li>Auto: gleichmäßig verzögert. Lkw: gleichförmig, startet bei x₀ = 40 m.</li><li>Auffahren heißt x<sub>Auto</sub>(t) = x<sub>Lkw</sub>(t).</li><li>Für b): „Gerade noch vermieden“ heißt, das Auto berührt den Lkw nur und wird dabei genau so langsam wie er. Die Gleichung hat dann <em>genau eine</em> Lösung. Was gilt dann für die Diskriminante?</li></ul>`,
-`<p>a = 1500 N : 1500 kg = 1 m/s². Umrechnen: 108 km/h = 30 m/s, 72 km/h = 20 m/s.</p>
-<span class="eq">30·t − 0,5·t² = 40 + 20·t &nbsp;⇒&nbsp; t² − 20·t + 80 = 0</span>
-<p>Von den zwei Lösungen zählt die kleinere: Das ist der erste Kontakt.</p>
-<p>Für b) lässt du a als Unbekannte stehen:</p>
-<span class="eq">½·a·t² − 10·t + 40 = 0 &nbsp;⇒&nbsp; t² − (20/a)·t + 80/a = 0</span>
-<p>Setze die Diskriminante (10/a)² − 80/a gleich null und löse nach a auf. Dann F = m · a.</p>`,
+`<p><b>Gegeben:</b> m = 1500 kg, F<sub>B</sub> = 1,5 kN, v<sub>A</sub> = 108 km/h, v<sub>L</sub> = 72 km/h, d = 40 m. <b>Gesucht:</b> a) Zeit t<sub>1</sub> bis zum Auffahren, b) kleinste Bremskraft F<sub>min</sub>.</p>
+<ul><li>Nullpunkt an der Front des Autos bei Bremsbeginn.</li><li>Auto: gleichmäßig verzögert. Lkw: gleichförmig, startet bei d.</li><li>Auffahren heißt x<sub>A</sub>(t) = x<sub>L</sub>(t).</li><li>Für b): „Gerade noch vermieden“ heißt: Die quadratische Gleichung hat <em>genau eine</em> Lösung. Was gilt dann für die Diskriminante?</li></ul>`,
+`<p>Beschleunigung: <span class="eq">a = F<sub>B</sub> / m</span></p>
+<span class="eq">x<sub>A</sub>(t) = v<sub>A</sub>·t − ½·a·t²</span>
+<span class="eq">x<sub>L</sub>(t) = d + v<sub>L</sub>·t</span>
+<p>Gleichsetzen und durch ½·a teilen. Mit Δv = v<sub>A</sub> − v<sub>L</sub> wird es übersichtlich:</p>
+<span class="eq">t² − (2·Δv / a)·t + 2·d / a = 0</span>
+<p>a) p-q-Formel, die kleinere Lösung ist der erste Kontakt.</p>
+<p>b) Diskriminante gleich null setzen: <span class="eq">(Δv / a)² − 2·d / a = 0</span> Nach a auflösen, dann F = m·a. Zahlen erst am Schluss.</p>`,
 `<ol>
-<li>a = 1 m/s², v<sub>Auto</sub> = 30 m/s, v<sub>Lkw</sub> = 20 m/s.</li>
-<li>Ansatz: 30·t − 0,5·t² = 40 + 20·t ⇒ t² − 20·t + 80 = 0.</li>
-<li>p-q-Formel: t = 10 ± √(100 − 80) = 10 ± √20 ≈ 10 ± 4,47.</li>
-<li><b>a)</b> Erster Kontakt nach t ≈ <b>5,53 s</b>. Das Auto fährt dann noch 30 − 5,53 ≈ 24,5 m/s, also etwa 16 km/h schneller als der Lkw. (Die zweite Lösung 14,5 s würde gelten, wenn das Auto durch den Lkw hindurchfahren könnte.)</li>
-<li>b) Diskriminante null: (10/a)² − 80/a = 0 ⇒ 100/a² = 80/a ⇒ a = 100 : 80 = 1,25 m/s².</li>
-<li><b>b)</b> F = m · a = 1500 kg · 1,25 m/s² = <b>1875 N</b>.</li>
+<li><b>Ansatz:</b> x<sub>A</sub>(t) = x<sub>L</sub>(t) <span class="eq">v<sub>A</sub>·t − ½·a·t² = d + v<sub>L</sub>·t</span></li>
+<li><b>Umformen</b> mit Δv = v<sub>A</sub> − v<sub>L</sub>: <span class="eq">½·a·t² − Δv·t + d = 0 &nbsp;| · 2/a</span><span class="eq">t² − (2·Δv / a)·t + 2·d / a = 0</span></li>
+<li><b>p-q-Formel:</b> <span class="eq">t<sub>1,2</sub> = Δv / a ± √( (Δv / a)² − 2·d / a )</span> Der erste Kontakt ist die kleinere Lösung t<sub>1</sub> (Minuszeichen).</li>
+<li><b>Zahlen einsetzen:</b> v<sub>A</sub> = 30 m/s, v<sub>L</sub> = 20 m/s, Δv = 10 m/s.
+<span class="eq">a = F<sub>B</sub> / m = 1500 N / 1500 kg = 1 m/s²</span>
+<span class="eq">Δv / a = 10 m/s / 1 m/s² = 10 s, &nbsp; 2·d / a = 2 · 40 m / 1 m/s² = 80 s²</span>
+<span class="eq">t<sub>1</sub> = 10 s − √(100 s² − 80 s²) ≈ 10 s − 4,47 s</span>
+<b>a)</b> Das Auto fährt nach <b>t<sub>1</sub> ≈ 5,53 s</b> auf. Es ist dann noch v<sub>A</sub> − a·t<sub>1</sub> ≈ 24,5 m/s schnell, also etwa 16 km/h schneller als der Lkw.</li>
+<li><b>b) Bedingung:</b> genau eine Lösung, also Diskriminante null:
+<span class="eq">(Δv / a)² − 2·d / a = 0 &nbsp;| · a²</span>
+<span class="eq">Δv² − 2·d·a = 0 &nbsp;⇒&nbsp; a<sub>min</sub> = Δv² / (2·d)</span>
+<span class="eq">F<sub>min</sub> = m · a<sub>min</sub> = m · Δv² / (2·d)</span></li>
+<li><b>Zahlen einsetzen:</b> <span class="eq">F<sub>min</sub> = 1500 kg · (10 m/s)² / (2 · 40 m) = <b>1875 N</b></span></li>
 </ol>
-<p>Kontrolle: Mit a = 1,25 m/s² ist das Auto nach t = 10 : 1,25 = 8 s genau so schnell wie der Lkw. In diesen 8 s fährt es 30·8 − 0,625·64 = 200 m, der Lkw ist bei 40 + 160 = 200 m. Abstand null, keine Delle.</p>`
+<p>Kontrolle: Mit a<sub>min</sub> = 1,25 m/s² berührt das Auto den Lkw bei t = Δv / a<sub>min</sub> = 8 s. Genau dann ist es so schnell wie der Lkw.</p>`
   ]
 },
 {
@@ -262,23 +278,31 @@ const AUFGABEN = [
     {t:"Welchen Abstand zum Motorrad hätte das Auto beim Ausscheren mindestens haben müssen, um gefahrlos zu überholen?", unit:"m", wert:40*Math.sqrt(40)+40}
   ],
   tipps:[
-`<p>Hier stecken zwei Teilprobleme drin.</p>
-<ul><li>Zuerst die resultierende Kraft: F<sub>res</sub> = F<sub>Antrieb</sub> − F<sub>Widerstand</sub>. Dann a = F<sub>res</sub> : m.</li><li>Treffen mit dem Motorrad: Ort-Zeit-Gleichungen gleichsetzen. Das Motorrad startet bei x₀ = 225 m und fährt in negative Richtung.</li><li>Dauer des Überholens: Der Abstand zwischen Auto und Traktor wächst nur durch den Anteil ½·a·t². Beide haben ja dasselbe v₀.</li><li>Für b): Das Treffen mit dem Motorrad darf frühestens am Ende des Überholens passieren.</li></ul>`,
-`<p>F<sub>res</sub> = 2500 N ⇒ a = 2500 N : 1250 kg = 2 m/s². Umrechnen: 54 km/h = 15 m/s, 90 km/h = 25 m/s.</p>
-<span class="eq">x<sub>Auto</sub>(t) = 15·t + t²</span>
-<span class="eq">x<sub>Motorrad</sub>(t) = 225 − 25·t</span>
-<span class="eq">15·t + t² = 225 − 25·t &nbsp;⇒&nbsp; t² + 40·t − 225 = 0</span>
-<p>Überholdauer: x<sub>Auto</sub> − x<sub>Traktor</sub> = t² = 40 ⇒ t<sub>Ü</sub> = √40 s.</p>
-<p>Für b): Der Abstand D muss so groß sein, dass das Treffen genau bei t<sub>Ü</sub> passiert: D = x<sub>Auto</sub>(t<sub>Ü</sub>) + 25·t<sub>Ü</sub>.</p>`,
+`<p><b>Gegeben:</b> m = 1250 kg, F<sub>A</sub> = 3,0 kN, F<sub>W</sub> = 0,5 kN, v<sub>0</sub> = 54 km/h (Auto und Traktor), v<sub>M</sub> = 90 km/h, D = 225 m, Δs = 40 m. <b>Gesucht:</b> a) Zeit t<sub>1</sub> bis zum Treffen mit dem Motorrad, b) kleinster Abstand D<sub>min</sub>.</p>
+<ul><li>Zuerst die resultierende Kraft F<sub>res</sub> = F<sub>A</sub> − F<sub>W</sub>, dann a = F<sub>res</sub> / m.</li><li>Treffen mit dem Motorrad: x<sub>A</sub>(t) = x<sub>M</sub>(t). Das Motorrad startet bei D und fährt in negative Richtung.</li><li>Dauer des Überholens: Auto und Traktor haben dasselbe v<sub>0</sub>. Der Vorsprung wächst also nur durch ½·a·t².</li><li>Für b): Das Treffen darf frühestens am Ende des Überholens passieren.</li></ul>`,
+`<p>Beschleunigung: <span class="eq">a = (F<sub>A</sub> − F<sub>W</sub>) / m</span></p>
+<span class="eq">x<sub>A</sub>(t) = v<sub>0</sub>·t + ½·a·t²</span>
+<span class="eq">x<sub>M</sub>(t) = D − v<sub>M</sub>·t</span>
+<p>Gleichsetzen und durch ½·a teilen:</p>
+<span class="eq">t² + (2·(v<sub>0</sub> + v<sub>M</sub>) / a)·t − 2·D / a = 0</span>
+<p>Überholdauer: Vorsprung ½·a·t<sub>Ü</sub>² = Δs, also <span class="eq">t<sub>Ü</sub> = √(2·Δs / a)</span></p>
+<p>Für b): Setze x<sub>A</sub>(t<sub>Ü</sub>) = x<sub>M</sub>(t<sub>Ü</sub>) an und löse nach D auf. Zahlen erst am Schluss.</p>`,
 `<ol>
-<li>a = (3000 N − 500 N) : 1250 kg = 2 m/s².</li>
-<li>Ansatz: t² + 40·t − 225 = 0.</li>
-<li>p-q-Formel: t = −20 ± √(400 + 225) = −20 ± 25. Die negative Lösung −45 s liegt vor dem Ausscheren und fällt weg.</li>
-<li><b>a)</b> Auto und Motorrad treffen sich nach <b>5 s</b>.</li>
-<li>Überholdauer: t² = 40 ⇒ t<sub>Ü</sub> = √40 s ≈ 6,32 s. Das ist länger als 5 s. Der Überholvorgang muss abgebrochen werden!</li>
-<li><b>b)</b> D = 15·6,32 + 6,32² + 25·6,32 = 40·√40 + 40 ≈ <b>293 m</b>.</li>
+<li><b>Beschleunigung:</b> <span class="eq">a = (F<sub>A</sub> − F<sub>W</sub>) / m</span></li>
+<li><b>Ansatz:</b> x<sub>A</sub>(t) = x<sub>M</sub>(t) <span class="eq">v<sub>0</sub>·t + ½·a·t² = D − v<sub>M</sub>·t</span></li>
+<li><b>Umformen:</b> <span class="eq">½·a·t² + (v<sub>0</sub> + v<sub>M</sub>)·t − D = 0 &nbsp;| · 2/a</span><span class="eq">t² + (2·(v<sub>0</sub> + v<sub>M</sub>) / a)·t − 2·D / a = 0</span></li>
+<li><b>p-q-Formel:</b> <span class="eq">t<sub>1,2</sub> = −(v<sub>0</sub> + v<sub>M</sub>) / a ± √( ((v<sub>0</sub> + v<sub>M</sub>) / a)² + 2·D / a )</span> Nur das Pluszeichen gibt eine positive Zeit.</li>
+<li><b>Zahlen einsetzen:</b> v<sub>0</sub> = 15 m/s, v<sub>M</sub> = 25 m/s.
+<span class="eq">a = (3000 N − 500 N) / 1250 kg = 2 m/s²</span>
+<span class="eq">(v<sub>0</sub> + v<sub>M</sub>) / a = 40 m/s / 2 m/s² = 20 s, &nbsp; 2·D / a = 2 · 225 m / 2 m/s² = 225 s²</span>
+<span class="eq">t<sub>1</sub> = −20 s + √(400 s² + 225 s²) = −20 s + 25 s</span>
+<b>a)</b> Auto und Motorrad treffen sich nach <b>t<sub>1</sub> = 5 s</b>.</li>
+<li><b>Überholdauer:</b> <span class="eq">½·a·t<sub>Ü</sub>² = Δs &nbsp;⇒&nbsp; t<sub>Ü</sub> = √(2·Δs / a) = √(2 · 40 m / 2 m/s²) ≈ 6,32 s</span> Das ist länger als 5 s. Das Auto muss den Überholvorgang abbrechen!</li>
+<li><b>b) Ansatz:</b> Treffen genau bei t<sub>Ü</sub>: <span class="eq">v<sub>0</sub>·t<sub>Ü</sub> + ½·a·t<sub>Ü</sub>² = D<sub>min</sub> − v<sub>M</sub>·t<sub>Ü</sub></span>
+Mit ½·a·t<sub>Ü</sub>² = Δs folgt: <span class="eq">D<sub>min</sub> = (v<sub>0</sub> + v<sub>M</sub>)·t<sub>Ü</sub> + Δs = (v<sub>0</sub> + v<sub>M</sub>)·√(2·Δs / a) + Δs</span></li>
+<li><b>Zahlen einsetzen:</b> <span class="eq">D<sub>min</sub> = 40 m/s · 6,32 s + 40 m ≈ <b>293 m</b></span></li>
 </ol>
-<p>Zusatz: Am Ende fährt das Auto 15 + 2·6,32 ≈ 27,6 m/s ≈ 100 km/h. Mehr ist auf der Landstraße ohnehin nicht erlaubt.</p>`
+<p>Zusatz: Am Ende fährt das Auto v<sub>0</sub> + a·t<sub>Ü</sub> ≈ 27,6 m/s ≈ 100 km/h. Mehr ist auf der Landstraße ohnehin nicht erlaubt.</p>`
   ]
 },
 {
@@ -290,23 +314,30 @@ const AUFGABEN = [
     {t:"Das Auto fährt aber 72 km/h. Mit welcher Geschwindigkeit erreicht es die Stelle, an der das Kind steht?", unit:"km/h", wert:Math.sqrt(120)*3.6}
   ],
   tipps:[
-`<p>Hier ist die Anfangsgeschwindigkeit v₀ die Unbekannte, nicht die Zeit.</p>
-<ul><li>Berechne a aus F = m · a.</li><li>Teile den Anhalteweg auf: Reaktionsweg v₀ · t<sub>R</sub> plus Bremsweg.</li><li>Für den Bremsweg kennst du die Zeit nicht. Hol sie dir aus v(t) = v₀ − a·t mit v = 0 und setze sie in die Ort-Gleichung ein (Substitution).</li><li>So entsteht eine quadratische Gleichung in v₀.</li></ul>`,
-`<p>a = 8400 N : 1200 kg = 7 m/s².</p>
-<p>Bremszeit: 0 = v₀ − a·t<sub>B</sub> ⇒ t<sub>B</sub> = v₀ / a. Einsetzen:</p>
-<span class="eq">s<sub>B</sub> = v₀·t<sub>B</sub> − ½·a·t<sub>B</sub>² = v₀²/a − v₀²/(2a) = v₀² / (2a)</span>
-<p>Ansatz für den Anhalteweg:</p>
-<span class="eq">v₀ · 1 s + v₀² / 14 = 40 &nbsp;⇒&nbsp; v₀² + 14·v₀ − 560 = 0</span>
-<p>Für b): Reaktionsweg bei 20 m/s sind 20 m. Für das Bremsen bleiben noch 20 m. Gesucht ist v nach diesen 20 m. Entweder t aus 20 = 20·t − 3,5·t² bestimmen und in v(t) einsetzen. Oder die Substitution von oben allgemein nutzen: v² = v₀² − 2·a·s.</p>`,
+`<p><b>Gegeben:</b> m = 1200 kg, F<sub>B</sub> = 8,4 kN, t<sub>R</sub> = 1,0 s, s = 40 m; in b) v<sub>1</sub> = 72 km/h. <b>Gesucht:</b> a) größte Anfangsgeschwindigkeit v<sub>0</sub>, b) Geschwindigkeit v beim Kind.</p>
+<ul><li>Hier ist v<sub>0</sub> die Unbekannte, nicht die Zeit.</li><li>Anhalteweg = Reaktionsweg (gleichförmig) + Bremsweg (gleichmäßig verzögert).</li><li>Die Bremszeit kennst du nicht. Hol sie dir aus v(t) = v<sub>0</sub> − a·t mit v = 0 und setze sie in die Ort-Gleichung ein (Substitution).</li><li>So entsteht eine quadratische Gleichung in v<sub>0</sub>.</li></ul>`,
+`<p>Beschleunigung: <span class="eq">a = F<sub>B</sub> / m</span></p>
+<p>Reaktionsweg: <span class="eq">s<sub>R</sub> = v<sub>0</sub>·t<sub>R</sub></span></p>
+<p>Bremszeit aus v(t<sub>B</sub>) = 0: <span class="eq">t<sub>B</sub> = v<sub>0</sub> / a</span></p>
+<p>Einsetzen in die Ort-Gleichung (Substitution):</p>
+<span class="eq">s<sub>B</sub> = v<sub>0</sub>·t<sub>B</sub> − ½·a·t<sub>B</sub>² = v<sub>0</sub>² / (2·a)</span>
+<p>Ansatz: s<sub>R</sub> + s<sub>B</sub> = s ergibt eine quadratische Gleichung in v<sub>0</sub>. Bringe sie auf Normalform und nutze die p-q-Formel.</p>
+<p>Für b): Leite genauso allgemein her: Nach der Bremsstrecke s' gilt <span class="eq">v² = v<sub>1</sub>² − 2·a·s'</span> mit s' = s − v<sub>1</sub>·t<sub>R</sub>.</p>`,
 `<ol>
-<li>a = 8400 N : 1200 kg = 7 m/s².</li>
-<li>Bremsweg durch Substitution: s<sub>B</sub> = v₀² / (2a) = v₀² / 14.</li>
-<li>Ansatz: v₀ + v₀²/14 = 40 ⇒ v₀² + 14·v₀ − 560 = 0.</li>
-<li>p-q-Formel: v₀ = −7 ± √(49 + 560) = −7 ± 24,68. Nur die positive Lösung ist sinnvoll: v₀ ≈ 17,68 m/s.</li>
-<li><b>a)</b> v₀ ≈ 17,7 m/s ≈ <b>63,6 km/h</b>.</li>
-<li>b) 72 km/h = 20 m/s. Reaktionsweg 20 m, Bremsstrecke bis zum Kind 20 m.</li>
-<li>20 = 20·t − 3,5·t² ⇒ t² − (40/7)·t + 40/7 = 0 ⇒ t = 20/7 − √(120)/7 ≈ 1,29 s. (Die größere Lösung liegt nach dem Stillstand.)</li>
-<li><b>b)</b> v = 20 − 7 · 1,29 ≈ 10,95 m/s ≈ <b>39,4 km/h</b>. Kontrolle: v² = 20² − 2·7·20 = 120 ⇒ v ≈ 10,95 m/s.</li>
+<li><b>Beschleunigung:</b> <span class="eq">a = F<sub>B</sub> / m</span></li>
+<li><b>Bremsweg durch Substitution:</b> <span class="eq">v(t<sub>B</sub>) = v<sub>0</sub> − a·t<sub>B</sub> = 0 &nbsp;⇒&nbsp; t<sub>B</sub> = v<sub>0</sub> / a</span><span class="eq">s<sub>B</sub> = v<sub>0</sub>·(v<sub>0</sub> / a) − ½·a·(v<sub>0</sub> / a)²</span><span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;= v<sub>0</sub>² / a − v<sub>0</sub>² / (2·a) = v<sub>0</sub>² / (2·a)</span></li>
+<li><b>Ansatz:</b> s<sub>R</sub> + s<sub>B</sub> = s <span class="eq">v<sub>0</sub>·t<sub>R</sub> + v<sub>0</sub>² / (2·a) = s &nbsp;| · 2a</span><span class="eq">v<sub>0</sub>² + 2·a·t<sub>R</sub>·v<sub>0</sub> − 2·a·s = 0</span></li>
+<li><b>p-q-Formel:</b> <span class="eq">v<sub>0</sub> = −a·t<sub>R</sub> + √( (a·t<sub>R</sub>)² + 2·a·s )</span> Nur das Pluszeichen gibt eine positive Geschwindigkeit.</li>
+<li><b>Zahlen einsetzen:</b>
+<span class="eq">a = 8400 N / 1200 kg = 7 m/s²</span>
+<span class="eq">v<sub>0</sub> = −7 m/s² · 1,0 s + √( (7 m/s)² + 2 · 7 m/s² · 40 m )</span><span class="eq">&nbsp;&nbsp;&nbsp;= −7 m/s + √(609 m²/s²) ≈ 17,68 m/s</span>
+<b>a)</b> v<sub>0</sub> ≈ 17,7 m/s ≈ <b>63,6 km/h</b>.</li>
+<li><b>b) Herleitung:</b> Bremsstrecke bis zum Kind s' = s − v<sub>1</sub>·t<sub>R</sub>. Aus v = v<sub>1</sub> − a·t folgt t = (v<sub>1</sub> − v) / a. Einsetzen in s' = v<sub>1</sub>·t − ½·a·t²:
+<span class="eq">s' = v<sub>1</sub>·(v<sub>1</sub> − v) / a − (v<sub>1</sub> − v)² / (2·a)</span><span class="eq">&nbsp;&nbsp;&nbsp;= (v<sub>1</sub>² − v²) / (2·a)</span>
+<span class="eq">⇒ &nbsp; v = √( v<sub>1</sub>² − 2·a·(s − v<sub>1</sub>·t<sub>R</sub>) )</span></li>
+<li><b>Zahlen einsetzen:</b> v<sub>1</sub> = 20 m/s.
+<span class="eq">v = √( (20 m/s)² − 2 · 7 m/s² · (40 m − 20 m/s · 1,0 s) )</span><span class="eq">&nbsp;&nbsp;&nbsp;= √(120 m²/s²) ≈ 10,95 m/s</span>
+<b>b)</b> v ≈ <b>39,4 km/h</b>.</li>
 </ol>
 <p>Deutung: Bei Tempo 72 statt etwa 64 trifft das Auto das Kind noch mit fast 40 km/h. Ein paar km/h mehr machen beim Anhalten einen großen Unterschied.</p>`
   ]
