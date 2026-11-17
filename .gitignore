@@ -1,4 +1,14 @@
 *
+!*/
 !index.html
 !README.md
 !.gitignore
+!build.py
+!v1/index.html
+!v2/index.html
+!v3/index.html
+!medien/*.js
+!medien/*.css
+!medien/lib/*
+!medien/bilder/*.webp
+_planung/

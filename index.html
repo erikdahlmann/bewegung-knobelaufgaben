@@ -53,6 +53,10 @@ h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;line-height:1.15;mar
 .card .kicker{color:var(--rust);font-weight:800;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
 .card h3{font-size:1.5rem;letter-spacing:-.025em;margin:4px 0 12px}
 .story{color:var(--ink);max-width:760px}
+.medienplatz:empty{display:none}
+.fassung{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--muted)}
+.fassung a{padding:4px 10px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--text);font-weight:650;background:var(--white)}
+.fassung a[aria-current="page"]{background:var(--green);border-color:var(--green);color:#fff}
 .sketch{margin:16px 0;background:#f3f6f1;border:1px solid var(--line);border-radius:12px;padding:8px}
 .sketch svg{display:block;width:100%;height:auto}
 .sketch figcaption{font-size:.82rem;color:var(--muted);padding:4px 6px 0}
@@ -87,6 +91,7 @@ h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;line-height:1.15;mar
 <header class="top"><div class="wrap">
   <div class="brand"><i>a</i>Knifflige Bewegungsaufgaben</div>
   <nav><a href="#werkzeug">Werkzeugkasten</a><a href="#strategie">Strategie</a><a href="#aufgaben">Aufgaben</a><a href="https://dm-pkg.de/beschleunigte-bewegung-uebungen/">Grundaufgaben</a></nav>
+  <div class="fassung" data-fassung="0">Fassung: <a href="./">Skizze</a><a href="./v1/">V1 Bild</a><a href="./v2/">V2 Animation</a><a href="./v3/">V3 3D-Film</a></div>
 </div></header>
 
 <main>
@@ -331,6 +336,7 @@ function render() {
     <div class="kicker">Aufgabe ${cur + 1} · ${A.art}</div>
     <h3>${A.titel}</h3>
     <p class="story">${A.text}</p>
+    <div class="medienplatz"></div>
     <figure class="sketch">${SKIZZE[A.id]}<figcaption>${A.caption}</figcaption></figure>
     ${A.fragen.map((f, i) => `<form class="q" data-i="${i}">
       <p><b>${"ab"[i]})</b> ${f.t}</p>
@@ -361,8 +367,15 @@ function render() {
   const zu = el.querySelector("#zu"); if (zu) zu.onclick = () => { state[A.id + "tipp"] = 0; save(); render(); };
   el.querySelector("#prev").onclick = () => { cur--; render(); };
   el.querySelector("#next").onclick = () => { cur++; render(); };
+  if (window.medien) {
+    el.querySelector(".medienplatz").appendChild(MEDIEN);
+    if (MEDIEN.dataset.id !== A.id) { MEDIEN.dataset.id = A.id; window.medien(A.id, MEDIEN); }
+  }
   bar();
 }
+const MEDIEN = document.createElement("div"); MEDIEN.className = "medien";
+window.neuZeichnen = render;
+{ const n = +document.querySelector(".fassung").dataset.fassung; document.querySelectorAll(".fassung a")[n].setAttribute("aria-current", "page"); }
 render();
 </script>
 <!-- rechtliches --><style>.erik-recht{font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-align:center;padding:18px 12px 22px;opacity:.75}.erik-recht a{color:inherit}@media print{.erik-recht{display:none}}</style><footer class="erik-recht"><a href="https://dm-pkg.de/impressum.html">Impressum</a> · <a href="https://dm-pkg.de/datenschutz.html">Datenschutz</a></footer><!-- /rechtliches --></body>
